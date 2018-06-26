@@ -1,20 +1,32 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import PictureCard from "./components/PictureCard";
+import Wrapper from "./components/Wrapper";
+import Navbar from "./components/Navbar";
+import pictures from "./pictures.json";
+import { BrowserRouter as Router } from "react-router-dom";
+import "./App.css";
 
-class App extends Component {
+class App extends React.Component {
+  state = {
+    pictures
+  }
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+    return(
+      <Router>
+        <div>
+          <Navbar />
+          <Wrapper>
+            {this.state.pictures.map((picture, i) => (
+            <PictureCard
+              key={i}
+              image={picture.image}
+            />
+            ))
+            }
+          </Wrapper>
+        </div>
+      </Router>
+    )
   }
 }
 
