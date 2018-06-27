@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = props => (
@@ -7,19 +6,23 @@ const Navbar = props => (
     <div class="row">
        <nav className="navbar">
           <div class= "col-md-4 col-xs-12">
-            <Link className="navbar-brand" to="/">
-            Clicky Game
-            </Link>
+          <img alt='The Simpsons Game' class='simpsonsNavPic' src={'./assets/images/simpsonsGame.jpg'} />
           </div>
           <div class= "col-md-4 col-xs-12">
-            <ul>
-                <h2>Click a Picture to Begin</h2>
-            </ul>
+            <div class='row'>
+              <h2>Click each image</h2>
+            </div>
+            <div class='row'>
+              <h2>only once!</h2>
+            </div>
           </div>
           <div class= "col-md-4 col-xs-12">
-            <ul>
-                <h2>Score</h2>
-            </ul>
+            <div class='row'>
+              <h2>Score</h2>
+            </div>
+            <div class='row'>
+
+            </div>
           </div>
       </nav>
     </div>
