@@ -2,9 +2,11 @@ import React from "react";
 import "./PictureCard.css";
 
 const PictureCard = props => (
-  <div className="img-container">
-    <img alt={props.name} src={props.image} />
-  </div>
+  <button onClick = {props.Clicked}>
+    <div className="img-container">
+      <img id={props.name} alt={props.name} src={props.image} data-clicked={props.clicked} />
+    </div>
+  </button>
 );
 
 export default PictureCard;
