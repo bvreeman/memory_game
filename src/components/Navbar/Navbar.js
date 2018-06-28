@@ -3,6 +3,7 @@ import "./Navbar.css";
 
 const Navbar = props => (
     <div className = "container-fluid">
+    {console.log(props)}
       <div className="row">
         <nav className="navbar navbar-fixed-top">
             <div className= "col-md-4 col-sm-4 col-xs-6">

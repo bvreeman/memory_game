@@ -10,7 +10,7 @@ import { Jumbotron } from 'reactstrap';
 class App extends React.Component {
   state = {
     cardArray: [],
-    pictures,
+    pictures: pictures,
     score: 0,
     highScore: 0
   }
@@ -44,14 +44,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.shuffleCards(pictures)
+    this.mixCards(pictures)
   }
 
   gameOver = () => {
 		alert("Game Over. You Lose");
 		this.setState({ score: 0 });
 		this.noClicked();
-		this.shuffleCards(pictures);
+		this.mixCards(pictures);
 	};
 
   scoreKeeper = () => {
@@ -64,17 +64,17 @@ class App extends React.Component {
 		}
 	};
 
+  // noClicked = () => {
+  //   pictures.forEach(function(i) {
+  //     document.getElementById(pictures[i].name).setAttribute("data-clicked", false);
+  //   })
+  // }
   noClicked = () => {
-    pictures.forEach(function(i) {
-      document.getElementById(pictures[i].name).setAttribute("data-clicked", false);
-})
-  }
-  // allFalse = () => {
-	// 	console.log(friends);
-	// 	for (let i = 0; i < friends.length; i++) {
-  //           document.getElementById(friends[i].name).setAttribute("data-clicked", false);
-  //       }
-	// };
+		console.log(pictures);
+		for (let i = 0; i < pictures.length; i++) {
+            document.getElementById(pictures[i].name).setAttribute("data-clicked", false);
+        }
+	};
 
   isItClicked = event => {
 		if (event.target.getAttribute("data-clicked") === "true") {
@@ -84,7 +84,7 @@ class App extends React.Component {
 			console.log("not clicked");
 			this.scoreKeeper();
 			event.target.setAttribute("data-clicked", true);
-			this.shuffleCards(pictures);
+			this.mixCards(pictures);
 		}
 	};
 
