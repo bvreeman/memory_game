@@ -1,15 +1,14 @@
 import React from "react";
 import "./PictureCard.css";
+// import App from "../../App.js";
 
-const handleClick = (props) => {
-  props.mixCards();
-  props.clickedCharacter(props.id);
-}
+
 
 const PictureCard = props => (
-  <button onClick = {props.Clicked}>
-    <div className="img-container" onClick={() => handleClick(props)}>
-      <img id={props.name} alt={props.name} src={props.image} data-clicked={props.clicked} />
+  <button>
+    <div className="img-container">
+      <img id={props.name} alt={props.name} src={props.image} data-clicked={props.clicked} onClick={props.clicked}
+ />
     </div>
   </button>
 );

@@ -6,6 +6,7 @@ import pictures from "./pictures.json";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import { Jumbotron } from 'reactstrap';
+import scores from "./scores.json";
 
 class App extends React.Component {
   state = {
@@ -13,7 +14,9 @@ class App extends React.Component {
     pictures: pictures,
     score: 0,
     highScore: 0,
-    clickedCards: []
+    count: 0,
+    clickedCards: [],
+    scores: scores
   }
 
   // shuffle = pictures => {
@@ -47,85 +50,41 @@ class App extends React.Component {
   componentDidMount() {
     this.mixCards(pictures)
   }
-
-  gameOver = () => {
-		alert("Game Over. You Lose");
-		this.setState({ score: 0 });
-		this.noClicked();
-		this.mixCards(pictures);
-	};
-
-  scoreKeeper = () => {
-		// up the score
-		this.setState({ score: this.state.score + 1 });
-
-		// check to see if the hi score needs to be updated
-		if (this.state.score >= this.state.highScore) {
-			this.setState({ highScore: this.state.highScore + 1 });
-		}
-	};
-
-  // noClicked = () => {
-  //   pictures.forEach(function(i) {
-  //     document.getElementById(pictures[i].name).setAttribute("data-clicked", false);
-  //   })
-  // }
-  noClicked = () => {
-		console.log(pictures);
-		for (let i = 0; i < pictures.length; i++) {
-            document.getElementById(pictures[i].name).setAttribute("data-clicked", false);
-        }
-	};
-
-  isItClicked = event => {
-		if (event.target.getAttribute("data-clicked") === "true") {
-			console.log("clicked");
-			this.gameOver();
-		} else {
-			console.log("not clicked");
-			this.scoreKeeper();
-			event.target.setAttribute("data-clicked", true);
-			this.mixCards(pictures);
-		}
-  };
   
-  clickedCharacter = (id) => {
-    const [pageBody] = document.getElementsByTagName('body');
-
-    if (this.state.clickedCards.includes(id)) {
-      this.setState({score: 0, clickedCards: []})
-
-      pageBody.classList.add('shakeWrapper')
-      this.setState({footerText: 'You picked that already! Start Over.'})
-      setTimeout(() => {
-        pageBody.classList.remove('shakeWrapper');
-      }, 500);
-      setTimeout(() => {
-        this.setState({footerText: ""})
-      }, 1800)
-
-    } else {
-      this.setState({clickedCards: [...this.state.clickedCards, id]})
-      this.setState({score: this.state.score + 1})
-      if (this.state.score >= this.state.topScore) {
-        this.setState({topScore: this.state.score + 1})
-
-      } 
-      if (this.state.score === 11) {
-        this.setState({footerText: 'You Won! Play again?'})
-        this.setState({score: 0, clickedCards: [], pictures: pictures})
-        setTimeout(() => {
-          this.setState({footerText: ''})
-        }, 1800)
-      } 
+  handleClick = (clickedItem) => {
+    let scoreArray = this.state.scores
+    if (clickedItem.clicks === 0) {
+      clickedItem.clicks ++
+      if (scoreArray[0].score === scoreArray[0].highScore) {
+      scoreArray[0].score++;
+      scoreArray[0].high++;
+      }
+      else if (scoreArray[0].score < scoreArray[0].high){
+      scoreArray[0].score++;
+      }
+      this.setState({
+      scoreArray
+      });
     }
-  }
+    else {
+      scoreArray[0].score = 0;
+      this.setState({
+        scoreArray,
+      });
+      this.state.pictures.forEach(picture => (
+        picture.clicks=0
+      ))
+    }
+  };
 
   render() {
     return(
       <Router>
         <div>
-          <Navbar />
+          <Navbar 
+            score = {scores[0].score}
+            highScore = {scores[0].highScore}
+          />
           <Jumbotron>
             <div className="container-fluid">
               <img alt='The Simpsons' className='jumboPic' src={'/assets/images/simpsonsJumbotron.png'} />
@@ -141,10 +100,10 @@ class App extends React.Component {
               name = {picture.name}
               clicked = {false}
               isItClicked = {this.isItClicked}
-              
             />
             ))
             }
+            {console.log(this.state)}
           </Wrapper>
         </div>
       </Router>
