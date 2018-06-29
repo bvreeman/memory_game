@@ -12,7 +12,8 @@ class App extends React.Component {
     cardArray: [],
     pictures: pictures,
     score: 0,
-    highScore: 0
+    highScore: 0,
+    clickedCards: []
   }
 
   // shuffle = pictures => {
@@ -86,7 +87,39 @@ class App extends React.Component {
 			event.target.setAttribute("data-clicked", true);
 			this.mixCards(pictures);
 		}
-	};
+  };
+  
+  clickedCharacter = (id) => {
+    const [pageBody] = document.getElementsByTagName('body');
+
+    if (this.state.clickedCards.includes(id)) {
+      this.setState({score: 0, clickedCards: []})
+
+      pageBody.classList.add('shakeWrapper')
+      this.setState({footerText: 'You picked that already! Start Over.'})
+      setTimeout(() => {
+        pageBody.classList.remove('shakeWrapper');
+      }, 500);
+      setTimeout(() => {
+        this.setState({footerText: ""})
+      }, 1800)
+
+    } else {
+      this.setState({clickedCards: [...this.state.clickedCards, id]})
+      this.setState({score: this.state.score + 1})
+      if (this.state.score >= this.state.topScore) {
+        this.setState({topScore: this.state.score + 1})
+
+      } 
+      if (this.state.score === 11) {
+        this.setState({footerText: 'You Won! Play again?'})
+        this.setState({score: 0, clickedCards: [], pictures: pictures})
+        setTimeout(() => {
+          this.setState({footerText: ''})
+        }, 1800)
+      } 
+    }
+  }
 
   render() {
     return(
