@@ -1,13 +1,10 @@
 import React from "react";
 import "./PictureCard.css";
-// import App from "../../App.js";
-
-
 
 const PictureCard = props => (
   <button>
     <div className="img-container">
-      <img id={props.name} alt={props.name} src={props.image} data-clicked={props.clicked} onClick={props.clicked}
+      <img id={props.name} alt={props.name} src={props.image} data-clicked={props.clicked} onClick={() => this.props.handleClick(this.props.clicked)}
  />
     </div>
   </button>

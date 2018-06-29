@@ -6,75 +6,66 @@ import pictures from "./pictures.json";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import { Jumbotron } from 'reactstrap';
-import scores from "./scores.json";
 
 class App extends React.Component {
   state = {
-    cardArray: [],
     pictures: pictures,
     score: 0,
     highScore: 0,
-    count: 0,
     clickedCards: [],
-    scores: scores
   }
 
-  // shuffle = pictures => {
-  //   let buffer_array = pictures.slice(),
-  //   cardArray = [],
-  //   index;
-
-  //   pictures.forEach(function () {
-  //     index = Math.floor(Math.random() * buffer_array.length);
-  //     cardArray.push(buffer_array[index]);
-  //     buffer_array.splice(index, 1);
-  //   });
-  //   return cardArray;
-  // }
-
-  // componentDidMount() {
-  //   this.shuffle(pictures)
-  // }
+  gameOver = () => {
+    // this.setState({
+    //   score: 0,
+    //   clickedCards: []
+    // })
+    this.mixCards(pictures)
+  }
 
   mixCards = array => {
-    let i, h, g;
-    for (i = array.length -1; i > 0; i--) {
-      h = Math.floor(Math.random() * (i + 1));
-      g = array[i];
-      array[i] = array[h];
-      array[h] = g;
-    }
-    this.setState({ cardArray: array })
+    const newArray = array.sort(() => Math.random()-0.5)
+    this.setState({pictures : newArray})
   }
 
   componentDidMount() {
     this.mixCards(pictures)
   }
   
-  handleClick = (clickedItem) => {
-    let scoreArray = this.state.scores
-    if (clickedItem.clicks === 0) {
-      clickedItem.clicks ++
-      if (scoreArray[0].score === scoreArray[0].highScore) {
-      scoreArray[0].score++;
-      scoreArray[0].high++;
-      }
-      else if (scoreArray[0].score < scoreArray[0].high){
-      scoreArray[0].score++;
-      }
-      this.setState({
-      scoreArray
-      });
-    }
-    else {
-      scoreArray[0].score = 0;
-      this.setState({
-        scoreArray,
-      });
-      this.state.pictures.forEach(picture => (
-        picture.clicks=0
-      ))
-    }
+  handleClick = clickedItem => {
+    // if (this.state.clickedCards.includes(clickedItem)){
+    //   this.gameOver()
+    // } else {
+    //   this.state.clickedCards.push(clickedItem);
+    //   this.mixCards()
+    //   this.setState((prevState) => {
+    //     prevState.score++
+    //   })
+    // }
+    this.state.mixCards(pictures);
+    // let scoreArray = this.state.scores
+    // if (clickedItem.clicks === 0) {
+    //   clickedItem.clicks ++
+    //   if (scoreArray[0].score === scoreArray[0].highScore) {
+    //   scoreArray[0].score++;
+    //   scoreArray[0].high++;
+    //   }
+    //   else if (scoreArray[0].score < scoreArray[0].high){
+    //   scoreArray[0].score++;
+    //   }
+    //   this.setState({
+    //   scoreArray
+    //   });
+    // }
+    // else {
+    //   scoreArray[0].score = 0;
+    //   this.setState({
+    //     scoreArray,
+    //   });
+    //   this.state.pictures.forEach(picture => (
+    //     picture.clicks=0
+    //   ))
+    // }
   };
 
   render() {
@@ -82,8 +73,8 @@ class App extends React.Component {
       <Router>
         <div>
           <Navbar 
-            score = {scores[0].score}
-            highScore = {scores[0].highScore}
+            score = {this.state.score}
+            highScore = {this.state.highScore}
           />
           <Jumbotron>
             <div className="container-fluid">
@@ -98,12 +89,12 @@ class App extends React.Component {
               id = {i}
               image = {picture.image}
               name = {picture.name}
-              clicked = {false}
-              isItClicked = {this.isItClicked}
+              clicked = {this.clicked}
+              handleClick={this.handleClick}
             />
             ))
             }
-            {console.log(this.state)}
+            {/* {console.log(this.state)} */}
           </Wrapper>
         </div>
       </Router>
