@@ -15,11 +15,22 @@ class App extends React.Component {
     clickedCards: [],
   }
 
+  updateHighScore = (score) => {
+    if (score > this.state.highScore) {
+      return score;
+    } else {
+      return this.state.highScore;
+    }
+  };
+  
+
   gameOver = () => {
-    // this.setState({
-    //   score: 0,
-    //   clickedCards: []
-    // })
+    let newHighScore = this.updateHighScore(this.state.score);
+    this.setState({
+      score: 0,
+      clickedCards: [],
+      highScore: newHighScore
+    })
     this.mixCards(pictures)
   }
 
@@ -33,17 +44,18 @@ class App extends React.Component {
   }
   
   handleClick = clickedItem => {
-    // if (this.state.clickedCards.includes(clickedItem)){
-    //   this.gameOver()
-    // } else {
-    //   this.state.clickedCards.push(clickedItem);
-    //   this.mixCards()
-    //   this.setState((prevState) => {
-    //     prevState.score++
-    //   })
-    // }
-    this.state.mixCards(pictures);
+    console.log('clicked now')
+    if (this.state.clickedCards.includes(clickedItem)){
+      this.gameOver()
+    } else {
+      this.state.clickedCards.push(clickedItem);
+      this.mixCards()
+      this.setState((prevState) => {
+        prevState.score++
+      })
+    }
     // let scoreArray = this.state.scores
+    // console.log(scoreArray);
     // if (clickedItem.clicks === 0) {
     //   clickedItem.clicks ++
     //   if (scoreArray[0].score === scoreArray[0].highScore) {
@@ -90,7 +102,7 @@ class App extends React.Component {
               image = {picture.image}
               name = {picture.name}
               clicked = {this.clicked}
-              handleClick={this.handleClick}
+              onClick={this.handleClick}
             />
             ))
             }
