@@ -26,6 +26,15 @@ class App extends React.Component {
 
   gameOver = () => {
     let newHighScore = this.updateHighScore(this.state.score);
+    if (this.state.score === 11) {
+      alert('You win! You got them all!')
+      this.setState({
+        score: 0,
+        highScore: 12,
+        clickedCards: [],
+      })
+      this.mixCards(pictures)
+    } else {
     alert('You lose');
     this.setState({
       score: 0,
@@ -34,6 +43,7 @@ class App extends React.Component {
     })
     this.mixCards(pictures)
   }
+}
 
   mixCards = array => {
     const newArray = pictures.sort(() => Math.random()-0.5)
@@ -47,6 +57,8 @@ class App extends React.Component {
   handleClick = (id) => {
     console.log(id)
     if (this.state.clickedCards.includes(id)){
+      this.gameOver()
+    } else if (this.state.score === 11) {
       this.gameOver()
     } else {
       this.state.clickedCards.push(id);
