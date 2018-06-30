@@ -45,40 +45,16 @@ class App extends React.Component {
   }
   
   handleClick = (id) => {
-    console.log(this.state.clickedCards)
-    if (this.state.clickedCards.includes(this.state.pictures)){
+    console.log(id)
+    if (this.state.clickedCards.includes(id)){
       this.gameOver()
     } else {
-      this.state.clickedCards.push(this.state.clickedCards);
+      this.state.clickedCards.push(id);
       this.mixCards()
       this.setState((prevState) => {
         prevState.score++
       })
     }
-    // let scoreArray = this.state.scores
-    // console.log(scoreArray);
-    // if (clickedItem.clicks === 0) {
-    //   clickedItem.clicks ++
-    //   if (scoreArray[0].score === scoreArray[0].highScore) {
-    //   scoreArray[0].score++;
-    //   scoreArray[0].high++;
-    //   }
-    //   else if (scoreArray[0].score < scoreArray[0].high){
-    //   scoreArray[0].score++;
-    //   }
-    //   this.setState({
-    //   scoreArray
-    //   });
-    // }
-    // else {
-    //   scoreArray[0].score = 0;
-    //   this.setState({
-    //     scoreArray,
-    //   });
-    //   this.state.pictures.forEach(picture => (
-    //     picture.clicks=0
-    //   ))
-    // }
   };
 
   render() {
@@ -98,9 +74,9 @@ class App extends React.Component {
           <Wrapper>
             {this.state.pictures.map((picture, i) => (
               // console.log(this.handleClick)))}
-              <button>
+              <button key={i}>
                 <div className="img-container">
-                  <img id={i} alt={picture.name} src={picture.image} data-clicked={picture.clicked} onClick={this.handleClick} />
+                  <img id={picture.id} key={i} alt={picture.name} src={picture.image} data-clicked={picture.clicked} onClick={this.handleClick.bind(this, picture.id)} />
                 </div>
               </button>
             ))
