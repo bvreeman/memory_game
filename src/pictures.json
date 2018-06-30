@@ -2,74 +2,62 @@
     {
       "id": 1,
       "name": "Bart Simpson",
-      "image": "./assets/images/bart.png",
-      "clicked": false
+      "image": "./assets/images/bart.png"
     },
     {
       "id": 2,
       "name": "Bart Simpson",
-      "image": "./assets/images/bart2.png",
-      "clicked": false
+      "image": "./assets/images/bart2.png"
     },
     {
       "id": 3,
       "name": "Bart Simpson",
-      "image": "./assets/images/bart3.png",
-      "clicked": false
+      "image": "./assets/images/bart3.png"
     },
     {
       "id": 4,
       "name": "Lisa Simpson",
-      "image": "./assets/images/lisa.png",
-      "clicked": false
+      "image": "./assets/images/lisa.png"
     },
     {
       "id": 5,
       "name": "Lisa Simpson",
-      "image": "./assets/images/lisa2.png",
-      "clicked": false
+      "image": "./assets/images/lisa2.png"
     },
     {
       "id": 6,
       "name": "Homer Simpson",
-      "image": "./assets/images/homer.png",
-      "clicked": false
+      "image": "./assets/images/homer.png"
     },
     {
       "id": 7,
       "name": "Homer Simpson",
-      "image": "./assets/images/homer2.png",
-      "clicked": false
+      "image": "./assets/images/homer2.png"
     },
     {
       "id": 8,
       "name": "Maggie Simpson",
-      "image": "./assets/images/maggie.png",
-      "clicked": false
+      "image": "./assets/images/maggie.png"
     },
     {
       "id": 9,
       "name": "Maggie Simpson",
-      "image": "./assets/images/maggie2.png",
-      "clicked": false
+      "image": "./assets/images/maggie2.png"
     },
     {
       "id": 10,
       "name": "Marge Simpson",
-      "image": "./assets/images/marge.png",
-      "clicked": false
+      "image": "./assets/images/marge.png"
     },
     {
       "id": 11,
       "name": "The Simpsons",
-      "image": "./assets/images/simpsons.png",
-      "clicked": false
+      "image": "./assets/images/simpsons.png"
     },
     {
       "id": 12,
       "name": "The Simpsons",
-      "image": "./assets/images/simpsons2.png",
-      "clicked": false
+      "image": "./assets/images/simpsons2.png"
     }
-  ]
+]
   

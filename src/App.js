@@ -1,5 +1,5 @@
 import React from "react";
-import PictureCard from "./components/PictureCard";
+// import PictureCard from "./components/PictureCard";
 import Wrapper from "./components/Wrapper";
 import Navbar from "./components/Navbar";
 import pictures from "./pictures.json";
@@ -26,6 +26,7 @@ class App extends React.Component {
 
   gameOver = () => {
     let newHighScore = this.updateHighScore(this.state.score);
+    alert('You lose');
     this.setState({
       score: 0,
       clickedCards: [],
@@ -35,7 +36,7 @@ class App extends React.Component {
   }
 
   mixCards = array => {
-    const newArray = array.sort(() => Math.random()-0.5)
+    const newArray = pictures.sort(() => Math.random()-0.5)
     this.setState({pictures : newArray})
   }
 
@@ -43,12 +44,12 @@ class App extends React.Component {
     this.mixCards(pictures)
   }
   
-  handleClick = clickedItem => {
-    console.log('clicked now')
-    if (this.state.clickedCards.includes(clickedItem)){
+  handleClick = (id) => {
+    console.log(this.state.clickedCards)
+    if (this.state.clickedCards.includes(this.state.pictures)){
       this.gameOver()
     } else {
-      this.state.clickedCards.push(clickedItem);
+      this.state.clickedCards.push(this.state.clickedCards);
       this.mixCards()
       this.setState((prevState) => {
         prevState.score++
@@ -96,17 +97,14 @@ class App extends React.Component {
           <hr/>
           <Wrapper>
             {this.state.pictures.map((picture, i) => (
-            <PictureCard
-              key = {i}
-              id = {i}
-              image = {picture.image}
-              name = {picture.name}
-              clicked = {this.clicked}
-              onClick={this.handleClick}
-            />
+              // console.log(this.handleClick)))}
+              <button>
+                <div className="img-container">
+                  <img id={i} alt={picture.name} src={picture.image} data-clicked={picture.clicked} onClick={this.handleClick} />
+                </div>
+              </button>
             ))
             }
-            {/* {console.log(this.state)} */}
           </Wrapper>
         </div>
       </Router>

@@ -11,6 +11,22 @@
   margin-bottom: 0px;
 }
 
+.img-container {
+  height: 325px;
+  margin: 1rem;
+  position: relative;
+  width: 250px;
+  box-shadow: 0 3px 6px #999, 0 3px 6px #999;
+  text-align: center;
+  background:#6CADDC;
+  height: 100%;
+  overflow: hidden;
+}
+
+.img-container > img {
+  width: 60%;
+}
+
 @media screen and (max-width: 782px) {
 
   .jumbotron {
